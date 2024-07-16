@@ -1,0 +1,12 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+  {% for todo in todos %}
+    <div class="container justify-content-centre">
+        <div class="justify-content-centre">
+          <h1>{{ todo.todo }}</h1>
+          <h3>{{ todo.user }}</h3>
+          <small>{{ todo.created }}</small><hr>
+        </div>
+    </div>
+  {% endfor %}
+{% endblock content %}

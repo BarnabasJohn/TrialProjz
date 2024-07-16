@@ -1,0 +1,28 @@
+{% extends "todo/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <div class="container-md"
+       style="background-image: url('media\profile_pics\family-g98a2b34fe_1920.jpg'); height:400px;">
+    <div class="row justify-content-center py-3 px-5">
+      <div class="col-5 align-self-center justify-content-center border border-1 border-secondary rounded">
+        <form method="post">
+          {% csrf_token %}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Join Today</legend>
+            {{ form| crispy }}
+          </fieldset>
+          <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+          </div>
+        </form>
+        <div class="border-top pt-3">
+          <small class="text-muted">
+            Already have an account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

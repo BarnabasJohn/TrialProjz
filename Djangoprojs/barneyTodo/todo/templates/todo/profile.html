@@ -1,0 +1,74 @@
+{% extends 'todo/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <style>
+		.todo-completed{
+			text-decoration: line-through;
+			background: rgba(149, 165, 166, .3);
+		}
+	</style>
+    <div class="row justify-content-centre py-3 px-5">
+        <div class="col-sm-8 justify-content-centre ">
+            <img class="rounded-circle article-img" style="width: 80px; height: 80px" src="{{ user.profile.image.url }}">
+        </div>
+
+        <div class="col-sm-4 justify-content-centre ">
+
+            <ul class="list-group">
+                {% for todo in todos %}
+                    {% if todo.complete %}
+                        <li class="list-group-item todo-completed">{{ todo.text }}</li>
+                    {% else %}
+                        <a href="{% url 'complete' todo.id %}"><li class="list-group-item">{{ todo.text }}</li></a>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <ul class="list-group">
+        {% for todo in todos %}
+            {% if todo.complete %}
+                <li class="list-group-item todo-completed">{{ todo.text }}</li>
+            {% else %}
+                <a href="{% url 'complete' todo.id %}"><li class="list-group-item">{{ todo.text }}</li></a>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <ul class="list-group">
+        {% for shopping in shoppings %}
+            {% if shopping.complete %}
+                <li class="list-group-item todo-completed">{{ shopping.text }}</li>
+            {% else %}
+                <a href="{% url 'complete' shopping.id %}"><li class="list-group-item">{{ shopping.text }}</li></a>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <ul class="list-group">
+        {% for meet in meets %}
+            {% if meet.complete %}
+                <li class="list-group-item todo-completed">{{ meet.text }}</li>
+            {% else %}
+                <a href="{% url 'complete' meet.id %}"><li class="list-group-item">{{ meet.text }}</li></a>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <hr>
+    <br>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        {{ u_form| crispy }}
+        {{ p_form| crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+      </div>
+    </form>
+
+{% endblock %}
