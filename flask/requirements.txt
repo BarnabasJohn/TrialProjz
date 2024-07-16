@@ -1,0 +1,3 @@
+python -m pip install Flask
+python -m pip install Flask-SQLALchemy => oRM allows one to connect to a sql database
+python -m pip install flask-cors
